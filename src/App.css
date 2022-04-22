@@ -1,0 +1,29 @@
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-image: url(./images/bg.png);
+}
+
+.render {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 50px;
+  margin: 15px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  margin: 30px auto;
+  padding: 15px;
+  border: 1px solid white;
+  border-radius: 5px;
+
+}
