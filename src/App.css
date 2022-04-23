@@ -8,12 +8,13 @@ body{
 .render {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  row-gap: 50px;
+  row-gap: 40px;
   margin: 15px;
   justify-content: center;
   align-items: center;
   padding: 10px;
   box-sizing: border-box;
+  margin-left: 100px;
 }
 
 .input {
@@ -25,5 +26,36 @@ body{
   padding: 15px;
   border: 1px solid white;
   border-radius: 5px;
+}
 
+.loading {
+  text-align: center;
+  color: magenta;
+  font-size: 100px;
+  margin-top: 50vh;
+}
+
+.info{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.btn{
+  padding: 10px 15px;
+  background-color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.btn:hover{
+  background-color: cornflowerblue;
+  color: white;
+  transition: 1s ease;
+}
+
+.all-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

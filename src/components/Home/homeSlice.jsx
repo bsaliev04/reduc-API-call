@@ -1,8 +1,10 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 
-export const callToAPI = createAsyncThunk('api/recipies',async(obj,{state,error})=>{
+export const callToAPI = createAsyncThunk('api/products',async(obj,{state,error})=>{
     try{
-          const req = await fetch('https://fakestoreapi.com/products')
+          const req = await fetch(
+            "https://mocki.io/v1/7af31a8c-156e-4de5-b306-00d76c34e274"
+          );
           const res = await req.json()
           return res
     }catch(error){
@@ -12,7 +14,7 @@ export const callToAPI = createAsyncThunk('api/recipies',async(obj,{state,error}
 })
 
 const recipiesSlice = createSlice({
-    name:"recipies",
+    name:"products",
     initialState:[],
     reducers:{},
     extraReducers:{
