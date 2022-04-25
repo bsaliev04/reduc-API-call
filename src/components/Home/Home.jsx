@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callToAPI } from "./homeSlice";
+import { Link, useParams } from "react-router-dom";
+
 import {
   Grid,
   Card,
@@ -10,23 +12,21 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 
 function Home() {
-  const [quantity, setQuantity] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0)
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
   const newData = data.products;
+  let params = useParams();
 
-const elementsPerPage = 8;
-const start = currentPage * elementsPerPage;
-const end = start + elementsPerPage;
-const parcialData = newData.slice(start, end);
-const howManyPages = Math.ceil(newData.length / elementsPerPage);
-const arrayBtn = new Array(howManyPages).fill("buttonPage");
-
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(Number(params?.page || 0));
+  const elementsPerPage = 8;
+  const start = currentPage * elementsPerPage;
+  const end = start + elementsPerPage;
+  const parcialData = newData.slice(start, end);
+  const howManyPages = Math.ceil(newData.length / elementsPerPage);
+  const arrayBtn = new Array(howManyPages).fill("buttonPage");
 
   useEffect(() => {
     dispatch(callToAPI());
@@ -34,16 +34,27 @@ const arrayBtn = new Array(howManyPages).fill("buttonPage");
 
   return (
     <>
-      <input type="text" className="input" />
+      <input
+        type="text"
+        className="input"
+        placeholder="Search..."
+        onChange={(e) => setSearch(e.target.value)}
+      />
       <div className="render">
-        {parcialData.map((user) => {
+        {parcialData.filter((el) => {
+          if(search === ''){
+            return el
+          }else if(el.first_name.toLowerCase().includes(search.toLowerCase())){
+            return el
+          }
+        }).map((user) => {
           return (
-            <Card sx={{ maxWidth: 345 }} key={user.id}>
-              <CardMedia
+            <Card sx={{ maxWidth: 345 }} key={user.id} style={{borderRadius: 20}}>
+              <CardMedia style={{marginTop: 20}}
                 component="img"
-                height="140"
+                height="150"
                 image={user.image}
-                alt="green iguana"
+                alt="robots"
               />
               <div className="info">
                 <Typography gutterBottom variant="h6" component="div">
@@ -55,33 +66,7 @@ const arrayBtn = new Array(howManyPages).fill("buttonPage");
                 <Typography variant="h6" color="text.secondary">
                   {user.gender}
                 </Typography>
-                {/* <Typography variant="h6" color="text.secondary">
-                  {car.made}
-                </Typography> */}
               </div>
-              <Grid container spacing={2}>
-                <Grid item xs={4}>
-                  <Button
-                    variant="contained"
-                    onClick={() => setQuantity((prev) => prev + 1)}
-                  >
-                    One More
-                  </Button>
-                </Grid>
-                <Grid item xs={4}>
-                  <TextField disabled value={quantity} />
-                </Grid>
-                <Grid item xs={4}>
-                  <Button
-                    onClick={() =>
-                      setQuantity((prev) => (prev < 1 ? prev : prev - 1))
-                    }
-                    variant="contained"
-                  >
-                    Minus one
-                  </Button>
-                </Grid>
-              </Grid>
               <Button
                 fullWidth
                 onClick={() =>
@@ -91,21 +76,47 @@ const arrayBtn = new Array(howManyPages).fill("buttonPage");
                   ])
                 }
               >
-                Add To Card
+                Add To Cart
               </Button>
             </Card>
           );
         })}
       </div>
+
       <div className="all-btn">
-        {
-          arrayBtn.map((page, index) => {
-            return (
-            
-            <button className="btn" key={page + index} onClick={() => setCurrentPage(index)}>{index + 1}</button>
-            );
-          })  
-        }
+        <Link to={`/page/${currentPage < 1 ? 1 : currentPage}`}>
+          <button
+            className="btn prev"
+            onClick={() => setCurrentPage((prev) => (prev < 1 ? 0 : prev - 1))}
+          >
+            Prev
+          </button>
+        </Link>
+        {arrayBtn.map((page, index) => {
+          return (
+            <>
+              <Link to={`/page/${index + 1}`} key={index + page}>
+                <button
+                  className="btn"
+                  key={page + index}
+                  onClick={() => setCurrentPage(index)}
+                >
+                  {index + 1}
+                </button>
+              </Link>
+            </>
+          );
+        })}
+        <Link to={`/page/${currentPage > 13 ? 13 : currentPage + 1}`}>
+          <button
+            className="btn next"
+            onClick={() =>
+              setCurrentPage((prev) => (prev > 11 ? 12 : prev + 1))
+            }
+          >
+            Next
+          </button>
+        </Link>
       </div>
     </>
   );
