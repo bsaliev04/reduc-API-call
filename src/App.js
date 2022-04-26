@@ -21,7 +21,7 @@ class App extends React.Component {
 
   render() {
    return this.state.loading ? (
-     <h1 className="loading">Loading...</h1>
+     <h6 className="loading">Loading...</h6>
    ) : (
      <div className="App">
        <Routes>

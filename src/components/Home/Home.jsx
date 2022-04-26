@@ -4,13 +4,10 @@ import { callToAPI } from "./homeSlice";
 import { Link, useParams } from "react-router-dom";
 
 import {
-  Grid,
   Card,
   CardMedia,
-  CardContent,
   Typography,
   Button,
-  TextField,
 } from "@mui/material";
 
 function Home() {
@@ -30,11 +27,11 @@ function Home() {
 
   useEffect(() => {
     dispatch(callToAPI());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
-    <h3 className="head">Choose your favorite Robot Machine</h3>
+    <h3 className="head">Choose your favorite Robot</h3>
       <input
         type="text"
         className="input"
@@ -46,7 +43,7 @@ function Home() {
           if(search === ''){
             return el
           }else if(el.first_name.toLowerCase().includes(search.toLowerCase())){
-            return el
+            return el;
           }
         }).map((user) => {
           return (

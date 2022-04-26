@@ -80,7 +80,7 @@ body{
 @media all and (max-width: 768px){
   .render {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .head {
@@ -94,10 +94,11 @@ body{
   }
 }
 
-@media all and (max-width: 467px) {
+@media all and (max-width: 375px) {
   .render {
     display: grid;
     grid-template-columns: 1fr;
+    gap: 20px;
     height: 100vh;
     margin: 50px auto;
     overflow: scroll;
@@ -121,7 +122,12 @@ body{
     justify-content: center;
     align-items: center;
   }
- 
+  .card{
+    margin-top: 15px;
+    height: 345px;
+
+  }
+
   .head {
     font-size: 1rem;
   }
