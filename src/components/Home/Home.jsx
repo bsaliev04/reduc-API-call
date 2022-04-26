@@ -21,7 +21,7 @@ function Home() {
 
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(Number(params?.page || 0));
-  const elementsPerPage = 8;
+  const elementsPerPage = 10;
   const start = currentPage * elementsPerPage;
   const end = start + elementsPerPage;
   const parcialData = newData.slice(start, end);
@@ -34,6 +34,7 @@ function Home() {
 
   return (
     <>
+    <h3 className="head">Choose your favorite Robot Machine</h3>
       <input
         type="text"
         className="input"
@@ -49,7 +50,7 @@ function Home() {
           }
         }).map((user) => {
           return (
-            <Card sx={{ maxWidth: 345 }} key={user.id} style={{borderRadius: 20}}>
+            <Card sx={{ maxWidth: 345 }} key={user.id} style={{borderRadius: 20, cursor:'pointer'}}>
               <CardMedia style={{marginTop: 20}}
                 component="img"
                 height="150"
@@ -68,14 +69,7 @@ function Home() {
                 </Typography>
               </div>
               <Button
-                fullWidth
-                onClick={() =>
-                  setTocart((prev) => [
-                    ...prev,
-                    { title: title, price: price, quantity: quantity },
-                  ])
-                }
-              >
+                fullWidth>
                 Add To Cart
               </Button>
             </Card>
