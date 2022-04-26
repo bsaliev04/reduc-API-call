@@ -31,7 +31,7 @@ function Home() {
 
   return (
     <>
-    <h3 className="head">Choose your favorite Robot</h3>
+    <h6 className="head">Choose your favorite Robot</h6>
       <input
         type="text"
         className="input"
@@ -47,7 +47,7 @@ function Home() {
           }
         }).map((user) => {
           return (
-            <Card sx={{ maxWidth: 345 }} key={user.id} style={{borderRadius: 20, cursor:'pointer'}}>
+            <Card sx={{ maxWidth: 345 }} key={user.id} style={{borderRadius: 20, cursor:'pointer', height: '345px'}}>
               <CardMedia style={{marginTop: 20}}
                 component="img"
                 height="150"
@@ -102,7 +102,7 @@ function Home() {
           <button
             className="btn next"
             onClick={() =>
-              setCurrentPage((prev) => (prev > 10 ? 10 : prev + 1))
+              setCurrentPage((prev) =>  prev + 1)
             }
           >
             Next
