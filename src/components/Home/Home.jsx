@@ -101,11 +101,11 @@ function Home() {
             </>
           );
         })}
-        <Link to={`/page/${currentPage > 13 ? 13 : currentPage + 1}`}>
+        <Link to={`/page/${currentPage > 10 ? 10 : currentPage + 1}`}>
           <button
             className="btn next"
             onClick={() =>
-              setCurrentPage((prev) => (prev > 11 ? 12 : prev + 1))
+              setCurrentPage((prev) => (prev > 10 ? 10 : prev + 1))
             }
           >
             Next
